@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class XII Science | Beyond Tomorrow 2050</title>
+  <style>
+    /* Global Theme & Reset */
+    :root {
+      --bg-dark: #050b14;
+      --panel-bg: rgba(10, 25, 47, 0.75);
+      --cyan-glow: #00f0ff;
+      --blue-accent: #0077ff;
+      --text-main: #e0f2fe;
+      --text-muted: #94a3b8;
+      --border-hud: rgba(0, 240, 255, 0.3);
+      --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(0, 119, 255, 0.15), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.1), transparent 50%);
+      overflow-x: hidden;
+    }
+
+    /* Circuit Background Lines Effect */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                  linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container Layout */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 40px auto;
+      z-index: 1;
+    }
+
+    /* Header Styling */
+    header {
+      text-align: center;
+      padding: 30px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-hud);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-shadow: 0 0 12px var(--cyan-glow);
+      text-transform: uppercase;
+    }
+
+    header h2 {
+      font-size: 1.1rem;
+      color: var(--cyan-glow);
+      margin-top: 8px;
+      font-weight: 400;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    /* Stylish Internet Archive Video Player Section */
+    .video-section {
+      background: var(--panel-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-hud);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 0 30px rgba(0, 119, 255, 0.2);
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    /* HUD Corner Decoration Accents */
+    .video-section::before, .video-section::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--cyan-glow);
+    }
+    .video-section::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+    .video-section::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+    .player-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    .player-header h3 {
+      font-size: 1.2rem;
+      color: var(--cyan-glow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-indicator {
+      width: 10px;
+      height: 10px;
+      background-color: var(--cyan-glow);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--cyan-glow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Responsive Iframe Wrapper */
+    .video-frame-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+      background: #000;
+    }
+
+    .video-frame-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Magazine Highlights Grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel-bg);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--cyan-glow);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .card h4 {
+      color: var(--cyan-glow);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>BEYOND TOMORROW 2050</h1>
+      <h2>CLASS XII SCIENCE | ANNUAL MAGAZINE CLASS ARCHIVE</h2>
+      <p>"The future isn't human vs AI — it's human through AI."</p>
+    </header>
+
+    <div class="video-section">
+      <div class="player-header">
+        <h3><span class="status-indicator"></span> LIVE ARCHIVE BROADCAST</h3>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">SOURCE: INTERNET ARCHIVE</span>
+      </div>
+
+      <div class="video-frame-wrapper">
+        <!-- Notice the autoplay=1 parameter added at the end of the URL -->
+        <iframe 
+          src="https://archive.org/download/qr1_20260730/qr2.mp4?autoplay=1" 
+          allow="autoplay; fullscreen"
+          webkitallowfullscreen="true" 
+          mozallowfullscreen="true" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div class="highlights-grid">
+      <div class="card">
+        <h4>AI & Human Synergy</h4>
+        <p>Exploring how technology accelerates human potential without replacing curiosity, critical judgment, and creative thinking.</p>
+      </div>
+
+      <div class="card">
+        <h4>2050 Innovation Exposure</h4>
+        <p>Showcasing futuristic concepts like AIRVIVA smart air purification systems and adaptive AI-powered smart clothing.</p>
+      </div>
+
+      <div class="card">
+        <h4>Skills for Tomorrow</h4>
+        <p>Focusing on adaptability, ethics, robotics, and emotional intelligence for tomorrow's scientific leaders.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026-2027 Amenity Public School, Rudrapur | Class XII Science Interactive Archive
+  </footer>
+
+</body>
+</html>
